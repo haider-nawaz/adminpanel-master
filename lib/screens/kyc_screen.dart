@@ -71,6 +71,7 @@ class _KycScreenState extends State<KycScreen> {
         actions: [
           ElevatedButton(
             onPressed: () {
+              print("formattedCandidates: $formattedCandidates");
               //loop through the users list and check if the name and cnic of the user is in the formattedCandidates list
               //if it is, then update the user's status to approved and isVerified to true
               //if it is not, then update the user's status to rejected and isVerified to false
@@ -84,22 +85,23 @@ class _KycScreenState extends State<KycScreen> {
                   print("candidate: $candidate");
                   if (candidate['name'] ==
                           "${user.firstName} ${user.lastName}" &&
-                      candidate['cnic'] == user.cnic) {
+                      candidate['cnic'] == user.cnic.replaceAll("-", "")) {
                     isUserVerified = true;
-                    setState(() {
-                      if (isUserVerified) {
-                        print("user is verified");
-                        users[i].isVerified = true;
-                        users[i].status = 'approved';
-                      } else {
-                        print("user is not verified");
-                        users[i].isVerified = false;
-                        users[i].status = 'rejected';
-                      }
-                    });
-                    break;
+
+                    // break;
                   }
                 }
+                setState(() {
+                  if (isUserVerified) {
+                    print("user is verified");
+                    users[i].isVerified = true;
+                    users[i].status = 'approved';
+                  } else {
+                    print("user is not verified");
+                    users[i].isVerified = false;
+                    users[i].status = 'rejected';
+                  }
+                });
               }
               updateAllUsersData();
             },

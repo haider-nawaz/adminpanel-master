@@ -1,5 +1,7 @@
 import 'package:admin_panel/screens/Components/donators_category.dart';
 import 'package:admin_panel/screens/kyc_screen.dart';
+import 'package:admin_panel/screens/na_results_page.dart';
+import 'package:admin_panel/screens/voting_results.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +18,24 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   var _isElectionStarted = false;
+  late final List<Map<String, dynamic>> ppData;
+  void fetchVoteData() async {
+    //fetch data from firestore
+
+    await FirebaseFirestore.instance
+        .collection("PP")
+        .get()
+        .then((value) => {
+              for (var i in value.docs)
+                {
+                  // print(i.data()),
+                  ppData.add(i.data()),
+                },
+            })
+        .catchError((onError) {
+      print(onError);
+    });
+  }
 
   Future<void> checkElectionStatus() async {
     await FirebaseFirestore.instance
@@ -31,6 +51,9 @@ class _SideMenuState extends State<SideMenu> {
 
   @override
   void initState() {
+    ppData = [];
+    fetchVoteData();
+
     checkElectionStatus();
     super.initState();
   }
@@ -95,23 +118,28 @@ class _SideMenuState extends State<SideMenu> {
               },
             ),
             DrawerListTile(
-              title: ' Candidates',
-              icon: Icons.people,
+              title: ' PP Rseult',
+              icon: Icons.how_to_vote,
               press: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => VolunteersCategory()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => VotingResults(
+                            ppData: ppData,
+                          )),
+                );
               },
             ),
             DrawerListTile(
-              title: ' Result',
+              title: 'NA Result',
               icon: Icons.how_to_vote,
               press: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => VolunteersCategory()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NaResultsPage(),
+                  ),
+                );
               },
             ),
             // DrawerListTile(

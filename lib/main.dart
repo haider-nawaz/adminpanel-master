@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
               .apply(bodyColor: Colors.white),
           canvasColor: secondaryColor),
-      home: MainScreen(),
+      home: AdminLoginPage(),
     );
   }
 }

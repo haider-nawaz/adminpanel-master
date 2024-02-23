@@ -33,10 +33,4 @@ List demoMyFiles = [
     svgSrc: "assets/images/active_requests.svg",
     color: const Color(0xFFA4CDFF),
   ),
-  CloudStorageInfo(
-    title: "Completed",
-    numOfFiles: 541,
-    svgSrc: "assets/images/completed_orders.svg",
-    color: const Color(0xFF007EE5),
-  ),
 ];

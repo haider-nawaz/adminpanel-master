@@ -116,9 +116,34 @@ class _KycScreenState extends State<KycScreen> {
             const SizedBox(
               height: 40,
             ),
-            Text(
-              'Users Data',
-              style: Theme.of(context).textTheme.titleLarge,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Users Data',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      updateAllUsersData();
+                    },
+                    icon: const Icon(
+                      Icons.refresh,
+                      color: Colors.green,
+                    ),
+                  ),
+                )
+              ],
             ),
             const SizedBox(
               height: 40,

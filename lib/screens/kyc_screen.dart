@@ -251,9 +251,17 @@ class _KycScreenState extends State<KycScreen> {
           .doc(user.id)
           .update(user.toMap())
           .then(
-            (value) => print('User updated successfully'),
-          )
-          .catchError((onError) => Get.snackbar('Error', onError.toString()));
+            (value) {},
+          );
     }
+    Get.snackbar(
+      'Success',
+      'Refreshed successfully',
+      backgroundColor: Colors.green,
+      maxWidth: 300,
+      icon: const Icon(Icons.check),
+      shouldIconPulse: true,
+      duration: const Duration(seconds: 2),
+    );
   }
 }

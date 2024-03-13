@@ -1,4 +1,5 @@
 import 'package:admin_panel/screens/Components/donators_category.dart';
+import 'package:admin_panel/screens/display_results.dart';
 import 'package:admin_panel/screens/kyc_screen.dart';
 import 'package:admin_panel/screens/na_results_page.dart';
 import 'package:admin_panel/screens/voting_results.dart';
@@ -118,7 +119,7 @@ class _SideMenuState extends State<SideMenu> {
               },
             ),
             DrawerListTile(
-              title: ' PP Rseult',
+              title: 'Provincial Assembly',
               icon: Icons.how_to_vote,
               press: () {
                 Navigator.push(
@@ -131,7 +132,7 @@ class _SideMenuState extends State<SideMenu> {
               },
             ),
             DrawerListTile(
-              title: 'NA Result',
+              title: 'National Assembly',
               icon: Icons.how_to_vote,
               press: () {
                 Navigator.push(
@@ -142,16 +143,29 @@ class _SideMenuState extends State<SideMenu> {
                 );
               },
             ),
-            // DrawerListTile(
-            //   title: 'Update Profile',
-            //   icon: Icons.person,
-            //   press: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => AdminProfile()),
-            //     );
-            //   },
-            // ),
+            DrawerListTile(
+              title: 'Results',
+              icon: Icons.document_scanner,
+              press: () {
+                if (_isElectionStarted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          "Election is still ongoing. Please wait for it to end."),
+                    ),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Displayresults(
+                        ppData: ppData,
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
             //DrawerListTile(
             //title: 'Panel Settings',
             //icon: Icons.settings,

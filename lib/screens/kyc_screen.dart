@@ -251,8 +251,10 @@ class _KycScreenState extends State<KycScreen> {
           .doc(user.id)
           .update(user.toMap())
           .then(
-            (value) {},
-          );
+        (value) {
+          setState(() {});
+        },
+      );
     }
     Get.snackbar(
       'Success',
